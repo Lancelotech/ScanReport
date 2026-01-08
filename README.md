@@ -48,3 +48,108 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# Project Name: ScanReport (working title)
+
+## Product Specification
+
+This project is a mobile application for scanning documents or files,
+extracting structured data using an AI (LMM/LLM agent),
+and presenting the extracted data as a readable report linked to a user account.
+
+The main goal is to digitize unstructured documents (images, PDFs)
+into structured, editable data.
+
+---
+
+## Core Features
+
+### 1. Authentication
+- User signup and login (email/password, social login optional)
+- Each scanned document and report is linked to a specific user
+- Secure access: users can only see their own documents and reports
+
+---
+
+### 2. Document Scanning & Upload
+- Scan documents using device camera
+- Upload files (PDF, JPG, PNG)
+- Support multi-page documents (PDF or multiple images)
+- Preprocessing:
+  - Auto-crop
+  - Perspective correction
+  - Image enhancement for better text recognition
+
+---
+
+### 3. AI Data Extraction (LMM Agent)
+- Use OCR and/or Large Multimodal Model (LMM) to extract data
+- Convert unstructured content into structured JSON
+- Extraction is schema-based (predefined fields)
+- Support different document types (e.g. receipt, invoice, form, other)
+
+Example extracted fields:
+- Name
+- Date
+- Numbers / IDs
+- Amounts
+- Custom fields depending on document type
+
+---
+
+### 4. Report Generation
+- Display extracted data as a structured report
+- Allow manual editing and correction of extracted fields
+- Show confidence level or warnings for uncertain fields
+- Save final report version
+
+---
+
+### 5. History & Storage
+- History of scanned documents
+- View document status:
+  - uploading
+  - processing
+  - ready
+  - failed
+- Re-open past reports
+- Optional export (PDF / share)
+
+---
+
+### 6. Security & Privacy
+- Documents and reports are private per user
+- Secure file storage
+- Option to delete original files after processing
+- No document is shared without user action
+
+---
+
+## Technical Notes
+
+- Frontend: React Native (Expo)
+- Backend: Firebase (Auth, Firestore, Storage, Cloud Functions)
+- AI processing is asynchronous
+- UI must handle loading and processing states clearly
+
+---
+
+## MVP Scope
+
+Minimum viable version includes:
+- Login / Signup
+- Upload or scan document
+- AI extraction to structured JSON
+- Report screen with editable fields
+- Document history list
+
+---
+
+## Non-Goals (Out of Scope for MVP)
+- Advanced analytics
+- Team sharing
+- Admin dashboards
+- Real-time collaboration
+
+---
+
+End of specification.

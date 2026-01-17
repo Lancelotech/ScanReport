@@ -47,6 +47,7 @@ export interface FormProps<T extends Record<string, any>> {
   children?: React.ReactNode;
   formStyle?: ViewStyle;
   enableReinitialize?: boolean;
+  isSubmitting?: boolean; // External control over submitting state
 }
 
 // Internal helper to wrap onSubmit for Formik
@@ -80,6 +81,7 @@ export function Form<T extends Record<string, any>>({
   children,
   formStyle,
   enableReinitialize = false,
+  isSubmitting: externalIsSubmitting,
 }: FormProps<T>) {
   // Track tags for tag input fields
   const [fieldTags, setFieldTags] = useState<Record<string, string[]>>({});
@@ -103,9 +105,13 @@ export function Form<T extends Record<string, any>>({
         handleChange,
         handleBlur,
         handleSubmit,
-        isSubmitting,
+        isSubmitting: formikIsSubmitting,
         setFieldValue,
-      }: FormikProps<T>) => (
+      }: FormikProps<T>) => {
+        // Use external isSubmitting if provided, otherwise use Formik's internal state
+        const isSubmitting = externalIsSubmitting !== undefined ? externalIsSubmitting : formikIsSubmitting;
+        
+        return (
         <View className="w-full" {...({} as any)} style={formStyle}>
           {fields.map((field) => {
             const fieldName = field.name as keyof T;
@@ -277,7 +283,8 @@ export function Form<T extends Record<string, any>>({
             </View>
           )}
         </View>
-      )}
+        );
+      }}
     </Formik>
   );
 }
